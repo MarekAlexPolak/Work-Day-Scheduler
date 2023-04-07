@@ -1,23 +1,49 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
+//function for save button.
+function saveButton(){
+  //saves the value of the time attribute associated with the save button pressed.
+  let hour = $(this).parent().attr("time");
+  //saves the text value associated with the save button pressed.
+  let text = $(this).siblings("textarea").val();
+  //saves the the time and text object to local storage.
+  localStorage.setItem(hour, text);
+}
+//function for checking whats inside local storage.
+function checkStor(){
+
+  for(let i = 09 ; i <= 17 ; i++){ 
+      //saves the text value associated with each time value.
+      //.padStart is used to add a 0 in front of the initial 9 value.
+      let x = localStorage.getItem(String(i).padStart(2, '0'));
+      //prints any saved text entries 
+     $("[time='" + String(i).padStart(2, '0') + "'] .description").val(x); 
+  }
+}
+
 $(function () {
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page.
+   //create variable with the date value of the current day.
+   let curDay = dayjs().format("MMMM DD, YYYY")
+   //gets time value
+   let curTime = dayjs().format('HH')
+  //runs the checkStor function.
+  checkStor();
+  //change the text output on the html to the current date.
+  $("#currentDay").text("It is: " + curDay);
+  //loops through all the .time-block elements.
+  $(".time-block").each(function(){ 
+  //gets the associated time attribute value with whichever time-block element it is looping through.
+  let inputTime = $(this).attr("time");
+  //These if statements check where the time block is with relation to the current time and change the css accordingly.
+  if(inputTime < curTime){
+    $(this).addClass("past");
+  }
+  else if(inputTime === curTime){
+    $(this).addClass("present");
+  }
+  else{
+      $(this).addClass("future");
+    }
+  })
+  //checks for button press then runs the saveButton function.
+  $(".saveBtn").click(saveButton);
 });
+
