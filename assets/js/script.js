@@ -10,7 +10,7 @@ function saveButton(){
 //function for checking whats inside local storage.
 function checkStor(){
 
-  for(let i = 09 ; i <= 17 ; i++){ 
+  for(let i = 09; i < 18; i++){ 
       //saves the text value associated with each time value.
       //.padStart is used to add a 0 in front of the initial 9 value.
       let x = localStorage.getItem(String(i).padStart(2, '0'));
@@ -36,7 +36,7 @@ $(function () {
   if(inputTime < curTime){
     $(this).addClass("past");
   }
-  else if(inputTime === curTime){
+  else if(inputTime == curTime){
     $(this).addClass("present");
   }
   else{
