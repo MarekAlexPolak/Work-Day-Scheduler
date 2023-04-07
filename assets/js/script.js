@@ -12,7 +12,6 @@ function checkStor(){
 
   for(let i = 09; i < 18; i++){ 
       //saves the text value associated with each time value.
-      //.padStart is used to add a 0 in front of the initial 9 value.
       let x = localStorage.getItem(String(i).padStart(2, '0'));
       //prints any saved text entries 
      $("[time='" + String(i).padStart(2, '0') + "'] .description").val(x); 
