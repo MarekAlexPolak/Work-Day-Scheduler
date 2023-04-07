@@ -13,7 +13,7 @@ N/A
 
 ## Usage
 
-In order to use this simply go to the website: https://marekalexpolak.github.io/JS-Quiz-Game/
+In order to use this simply go to the website: https://marekalexpolak.github.io/Work-Day-Scheduler/
 
 Type in any task you wish to complete with the associated hour.
 
